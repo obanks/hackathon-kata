@@ -5,10 +5,14 @@ import {TextField} from '@material-ui/core';
 class App extends React.Component {
 
     calculate = (value) => {
+        let SPARE_SCORE = 10, SPARE_SYMBOL = '/';
+
         let output = 0;
-        let scores = value.split('');
-        scores.forEach(function (score) {
-            if (score !== '-') {
+        let scores = value.replace(/\-/g, '0').split('');
+        scores.forEach(function (score, index) {
+            if (score === SPARE_SYMBOL) {
+                output += SPARE_SCORE - parseInt(scores[index - 1]);
+            } else {
                 output += parseInt(score);
             }
         });

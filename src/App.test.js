@@ -32,5 +32,17 @@ describe('App', () => {
       changeInputValue('11111111111111111111');
       expect(outputValue()).toEqual(20);
     });
+    it('should calculate a score for any integer 1-9', function () {
+      changeInputValue('12345678912345678912');
+      expect(outputValue()).toEqual(93);
+    });
+    it('should calculate score as 10 for a spare and 19 misses', function () {
+      changeInputValue('-/------------------');
+      expect(outputValue()).toEqual(10);
+    });
+    it('should calculate score as 10 for a 5 then spare', function () {
+      changeInputValue('5/------------------');
+      expect(outputValue()).toEqual(10);
+    });
   });
 });
