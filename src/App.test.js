@@ -1,9 +1,36 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {shallow} from 'enzyme';
 import App from './App';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('App', () => {
+  let app;
+  let inputWrapper;
+
+  const changeInputValue = (value) => {
+    inputWrapper.simulate('change', {target: {value: value}});
+  };
+
+  const outputWrapper = () => {
+    return app.find('#output');
+  };
+
+  const outputValue = () => {
+    return outputWrapper().prop('value');
+  };
+
+  beforeEach(() => {
+    app = shallow(<App/>);
+    inputWrapper = app.find('#input');
+  });
+
+  describe('bowling score calculator', function () {
+    it('should calculate score as zero for all misses', function () {
+      changeInputValue('--------------------');
+      expect(outputValue()).toEqual(0);
+    });
+    it('should calculate score as 20 for all ones', function () {
+      changeInputValue('11111111111111111111');
+      expect(outputValue()).toEqual(20);
+    });
+  });
 });

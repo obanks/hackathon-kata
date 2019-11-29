@@ -23,14 +23,21 @@ class App extends React.Component {
         this.onChange = this.onChange.bind(this);
     }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        Hello World! V2
-      </header>
-    </div>
-  );
+    onChange = (event) => {
+        this.setState({
+            value: this.calculate(event.target.value)
+        });
+    };
+
+    render() {
+        return (
+            <div className="App">
+                <header className="App-header">Hackathon Bowling Kata</header>
+                <TextField id="input" variant="filled" label="Input" onChange={this.onChange}/>
+                <TextField id="output" variant="outlined" readOnly={true} value={this.state.value}/>
+            </div>
+        )
+    };
 }
 
 export default App;
